@@ -20,11 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Backend/Libmemcached.php';
 
 /**
  * Common tests for backends

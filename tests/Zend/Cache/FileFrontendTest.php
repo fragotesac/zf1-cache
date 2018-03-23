@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Frontend/File.php';
-require_once 'Zend/Cache/Backend/Test.php';
 
 /**
  * @category   Zend

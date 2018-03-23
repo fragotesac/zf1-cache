@@ -18,10 +18,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
- 
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Manager.php';
-require_once 'Zend/Config.php';
+
 
 /**
  * @category   Zend_Cache
@@ -179,7 +176,7 @@ class Zend_Cache_ManagerTest extends PHPUnit\Framework\TestCase
         $manager->setCacheTemplate('myCache', $config);
         $this->assertSame($config, $manager->getCacheTemplate('myCache'));
     }
-    
+
     public function testSetsConfigTemplateWithoutMultipartNameNormalisation()
     {
         $manager = new Zend_Cache_Manager;

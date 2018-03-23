@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Frontend/Class.php';
-require_once 'Zend/Cache/Backend/Test.php';
 
 /**
  * @todo: Should this class be named Zend_Cache_Something?
@@ -243,7 +237,7 @@ class Zend_Cache_ClassFrontendTest extends PHPUnit\Framework\TestCase
 
         $this->assertNull($return);
         $this->assertEquals('foobar_output(param1,param2)', $data);
-      
+
     }
 
     public function testConstructorWithABadCachedEntity()

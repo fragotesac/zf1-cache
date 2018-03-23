@@ -20,17 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Cache
- */
-require_once 'Zend/Cache.php';
-
-
-require_once 'Zend/Cache/Backend/File.php';
 class Zend_Cache_Backend_FooBarTest extends Zend_Cache_Backend_File { }
 class FooBarTestBackend extends Zend_Cache_Backend_File { }
 
-require_once 'Zend/Cache/Core.php';
 class Zend_Cache_Frontend_FooBarTest extends Zend_Cache_Core { }
 class FooBarTestFrontend extends Zend_Cache_Core { }
 
@@ -113,7 +105,7 @@ class Zend_Cache_FactoryTest extends PHPUnit\Framework\TestCase
         }
         $this->fail('Zend_Exception was expected but not thrown');
     }
-    
+
     /**
      * @group ZF-11988
      */
@@ -126,7 +118,7 @@ class Zend_Cache_FactoryTest extends PHPUnit\Framework\TestCase
             $this->assertNotEquals('Invalid frontend name [ZF11988\Frontend]', $e->getMessage());
         }
     }
-    
+
     /**
      * @group ZF-11988
      */
