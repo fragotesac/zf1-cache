@@ -33,11 +33,7 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
 {
     protected $_instance;
     private $_cache_dir;
-
-    public function __construct($name = null, array $data = array(), $dataName = '')
-    {
-        parent::__construct('Zend_Cache_Backend_TwoLevels', $data, $dataName);
-    }
+    protected $_className = 'Zend_Cache_Backend_TwoLevels';
 
     public function setUp($notag = false): void
     {
@@ -105,15 +101,14 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
     {
         $slowBackend = 'File';
         $fastBackend = $this->getMockBuilder('Zend_Cache_Backend_Apc')
-            ->setMethods(array('getFillingPercentage'))
+            ->onlyMethods(array('getFillingPercentage'))
             ->getMock();
-        $fastBackend->expects($this->at(0))
+        $fastBackend->expects($this->exactly(2))
             ->method('getFillingPercentage')
-            ->will($this->returnValue(0));
-        $fastBackend->expects($this->at(1))
-            ->method('getFillingPercentage')
-            ->will($this->returnValue(90));
-
+            ->willReturnOnConsecutiveCalls(
+                0,
+                90
+            );
 
         $slowBackendOptions = array(
             'cache_dir' => $this->_cache_dir
@@ -128,8 +123,8 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
         );
 
         $id = 'test' . uniqid();
-        $this->assertTrue($cache->save(10, $id)); //fast usage at 0%
 
+        $this->assertTrue($cache->save(10, $id)); //fast usage at 0%
         $this->assertTrue($cache->save(100, $id)); //fast usage at 90%
         $this->assertEquals(100, $cache->load($id));
     }
@@ -141,11 +136,11 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
     {
         $slowBackend = 'File';
         $fastBackend = $this->getMockBuilder('Zend_Cache_Backend_Apc')
-            ->setMethods(array('getFillingPercentage'))
+            ->onlyMethods(array('getFillingPercentage'))
             ->getMock();
         $fastBackend->expects($this->any())
             ->method('getFillingPercentage')
-            ->will($this->returnValue(90));
+            ->willReturn(90);
 
         $slowBackendOptions = array(
             'cache_dir' => $this->_cache_dir
